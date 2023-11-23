@@ -181,6 +181,23 @@ type Child struct {
 	BookmarkPosition      int64     `xml:"bookmarkPosition,attr,omitempty"`
 	OriginalWidth         int       `xml:"originalWidth,attr,omitempty"`
 	OriginalHeight        int       `xml:"originalHeight,attr,omitempty"`
+
+	// OpenSubsonic extensions (https://opensubsonic.netlify.app/docs/responses/child/)
+	MediaType          string       `xml:"mediaType,attr,omitempty"`
+	Played             time.Time    `xml:"played,attr,omitempty"`
+	BPM                int          `xml:"bpm,attr,omitempty"`
+	Comment            string       `xml:"comment,attr,omitempty"`
+	SortName           string       `xml:"sortName,attr,omitempty"`
+	MusicBrainzId      string       `xml:"musicBrainzId,attr,omitempty"`
+	Genres             []*ItemGenre `xml:"http://subsonic.org/restapi genres,omitempty"`
+	DisplayArtist      string       `xml:"displayArtist,attr,omitempty"`
+	DisplayAlbumArtist string       `xml:"displayAlbumArtist,attr,omitempty"`
+	DisplayComposer    string       `xml:"displayComposer,attr,omitempty"`
+	// Artists       []*ArtistID3 `xml:"http://subsonic.org/restapi artist,omitempty"`
+	// AlbumArtists       []*ArtistID3 `xml:"http://subsonic.org/restapi albumArtist,omitempty"`
+	// Contributors       []*Contributor `xml:"http://subsonic.org/restapi contributor,omitempty"`
+	// Moods       []*string `xml:"http://subsonic.org/restapi mood,omitempty"`
+	// ReplayGain *ReplayGain `xml:"replayGain,omitempty"`
 }
 
 // Directory is an entry in the hierarchical folder structure organization of the server database.
@@ -209,6 +226,11 @@ type Genre struct {
 
 type genres struct {
 	Genre []*Genre `xml:"http://subsonic.org/restapi genre,omitempty"`
+}
+
+// OpenSubsonic extension (https://opensubsonic.netlify.app/docs/responses/itemgenre/)
+type ItemGenre struct {
+	Name string `xml:"name,attr"`
 }
 
 // Index is a collection of artists that begin with the same first letter, along with that letter or category.
